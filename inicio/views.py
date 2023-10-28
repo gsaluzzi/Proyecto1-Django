@@ -1,24 +1,26 @@
 from django.shortcuts import render
 
-from django.http import HttpResponse
-from django.template import loader
+# from django.http import HttpResponse
+# from django.template import loader
 
-# from inicio.models import Paleta
+from inicio.models import Paleta
 # from inicio.forms import CrearPaletaFormulario, BusquedaPaletaFormulario
 
 def inicio(request):
     
     # v2
-    template = loader.get_template('inicio.html')
-    template_renderizado = template.render({})
+    # template = loader.get_template('inicio.html')
+    # template_renderizado = template.render({})
     
-    return HttpResponse(template_renderizado)
+    # return HttpResponse(template_renderizado)
     
     # v3
-#     return render(request, 'inicio/inicio.html', {})
+    return render(request, 'inicio/inicio.html', {})
 
-# def paletas(request):
+def paletas(request):
     
+    paleta = Paleta(marca='wilson', descripcion='pala de Giorgio', anio=2020)
+    paleta.save()
     # v1
     # marca_a_buscar = request.GET.get('marca')
     
@@ -34,7 +36,9 @@ def inicio(request):
 #         listado_de_paletas = Paleta.objects.filter(marca__icontains=marca_a_buscar)
     
 #     formulario = BusquedaPaletaFormulario()
-#     return render(request, 'inicio/paletas.html', {'formulario': formulario, 'listado_de_paletas': listado_de_paletas})
+
+
+    return render(request, 'inicio/paletas.html', {'paleta': paleta})
 
 
 # def crear_paleta(request):
