@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # from django.http import HttpResponse
 # from django.template import loader
 
-from inicio.models import Paleta
+from inicio.models import Celular, Tablet
+from inicio.forms import CrearCelularFormulario, CrearTabletFormulario
 # from inicio.forms import CrearPaletaFormulario, BusquedaPaletaFormulario
 
 def inicio(request):
@@ -17,10 +18,10 @@ def inicio(request):
     # v3
     return render(request, 'inicio/inicio.html', {})
 
-def paletas(request):
+# def paletas(request):
     
-    paleta = Paleta(marca='wilson', descripcion='pala de Giorgio', anio=2020)
-    paleta.save()
+#     paleta = Paleta(marca='wilson', descripcion='pala de Giorgio', anio=2020)
+#     paleta.save()
     # v1
     # marca_a_buscar = request.GET.get('marca')
     
@@ -38,7 +39,58 @@ def paletas(request):
 #     formulario = BusquedaPaletaFormulario()
 
 
-    return render(request, 'inicio/paletas.html', {'paleta': paleta})
+    # return render(request, 'inicio/paletas.html', {'paleta': paleta})
+
+
+# def celulares(request):
+    
+#     celular = Celular(marca='samsung', modelo='galaxy' , descripcion='celular de Giorgio', anio=2020)
+#     celular.save()
+#     return render(request, 'inicio/celulares.html', {})
+
+def crear_celular(request):  
+        
+    if request.method == 'POST':        
+        formulario = CrearCelularFormulario(request.POST)
+        # if formulario.is_valid():
+        # info_limpia = formulario.cleaned_data
+        marca = request.POST.get('marca')
+        modelo = request.POST.get('modelo')
+        descripcion = request.POST.get('descripcion')
+        anio = request.POST.get('anio')
+        celular = Celular(marca=marca, modelo=modelo, descripcion=descripcion, anio=anio)
+        celular.save()     
+        print(celular) 
+    formulario = CrearCelularFormulario()
+    return render(request, 'inicio/celulares.html', {'formulario_cel': formulario})
+    
+
+
+def crear_tablet(request):  
+        
+    if request.method == 'POST':        
+        formulario = CrearTabletFormulario(request.POST)
+        # if formulario.is_valid():
+        # info_limpia = formulario.cleaned_data
+        marca = request.POST.get('marca')
+        modelo = request.POST.get('modelo')
+        descripcion = request.POST.get('descripcion')
+        anio = request.POST.get('anio')
+        tablet = Tablet(marca=marca, modelo=modelo, descripcion=descripcion, anio=anio)
+        tablet.save()     
+    formulario = CrearTabletFormulario()
+    return render(request, 'inicio/tablets.html', {'formulario_tab': formulario})
+
+
+
+
+
+# def tablets(request):
+    
+#     tablet = Tablets(marca='samsung', modelo='galaxy' , descripcion='tablet de Giorgio', anio=2022)
+#     tablet.save()
+#     return render(request, 'inicio/tablets.html', {})
+
 
 
 # def crear_paleta(request):

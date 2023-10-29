@@ -1,15 +1,20 @@
-
 {% extends "base.html" %}
 
 {% block title_body1 %}
-Importadora Saluzzi
+Crea y Registra tu Celular
 {% endblock title_body1 %}
 
 {% block title_body2 %}
-Venta y compra de artículos electrónicos de alta gama!
+Completa los datos de tu equipo
 {% endblock title_body2 %}
 
 {% block seccion_body1 %}
+
+<form action="" method="POST">
+    {% csrf_token %}
+    {{formulario_cel}}
+    <input type="submit" value="Crear">
+</form>
 
 {% endblock seccion_body1 %}
 
