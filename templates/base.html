@@ -6,7 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
+        {% block title_head %}
         <title>Business Frontpage - Start Bootstrap Template</title>
+        {% endblock title_head %}
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Bootstrap icons-->
@@ -22,10 +24,10 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href={% url "celulares" %}>Celulares</a></li>
-                        <li class="nav-item"><a class="nav-link" href={% url "tablets" %}>Tablets</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Accesorios</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Contacto</a></li>
+                        <li class="nav-item"><a class="nav-link" href={% url "celulares_dispo" %}>Celulares</a></li>
+                        <li class="nav-item"><a class="nav-link" href={% url "celulares" %}>Crear Celular</a></li>
+                        <li class="nav-item"><a class="nav-link" href={% url "tablets" %}>Crear Tablet</a></li>
+                        <li class="nav-item"><a class="nav-link" href={% url "accesorios" %}>Crear Accesorio</a></li>
                     </ul>
                 </div>
             </div>
@@ -127,6 +129,7 @@
             </div>
         </section>
         <!-- Contact section-->
+        {% block contact_section %}
         <section class="bg-light py-5">
             <div class="container px-5 my-5 px-5">
                 <div class="text-center mb-5">
@@ -193,6 +196,7 @@
                 </div>
             </div>
         </section>
+        {% endblock contact_section %}
         <!-- Footer-->
         <footer class="py-5 bg-dark">
             <div class="container px-5"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>

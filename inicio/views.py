@@ -3,8 +3,8 @@ from django.shortcuts import render, redirect
 # from django.http import HttpResponse
 # from django.template import loader
 
-from inicio.models import Celular, Tablet
-from inicio.forms import CrearCelularFormulario, CrearTabletFormulario
+from inicio.models import Celular, Tablet, Accesorio
+from inicio.forms import CrearCelularFormulario, CrearTabletFormulario, CrearAccesorioFormulario, BusquedaCelularFormulario
 # from inicio.forms import CrearPaletaFormulario, BusquedaPaletaFormulario
 
 def inicio(request):
@@ -42,11 +42,14 @@ def inicio(request):
     # return render(request, 'inicio/paletas.html', {'paleta': paleta})
 
 
-# def celulares(request):
-    
-#     celular = Celular(marca='samsung', modelo='galaxy' , descripcion='celular de Giorgio', anio=2020)
-#     celular.save()
-#     return render(request, 'inicio/celulares.html', {})
+def celulares(request):
+    formulario_celular = BusquedaCelularFormulario(request.GET)
+    if formulario_celular.is_valid():
+        marca_a_buscar = formulario_celular.cleaned_data.get('marca')
+        listado_de_celulares = Celular.objects.filter(marca__icontains=marca_a_buscar)
+    formulario_celular = BusquedaCelularFormulario()
+    return render(request, 'inicio/celulares_dispo.html', {'formulario_celular' : formulario_celular ,'listado_de_celulares' : listado_de_celulares})
+
 
 def crear_celular(request):  
         
@@ -60,7 +63,6 @@ def crear_celular(request):
         anio = request.POST.get('anio')
         celular = Celular(marca=marca, modelo=modelo, descripcion=descripcion, anio=anio)
         celular.save()     
-        print(celular) 
     formulario = CrearCelularFormulario()
     return render(request, 'inicio/celulares.html', {'formulario_cel': formulario})
     
@@ -80,6 +82,24 @@ def crear_tablet(request):
         tablet.save()     
     formulario = CrearTabletFormulario()
     return render(request, 'inicio/tablets.html', {'formulario_tab': formulario})
+
+
+
+def crear_accesorio(request):  
+        
+    if request.method == 'POST':        
+        formulario = CrearAccesorioFormulario(request.POST)
+        # if formulario.is_valid():
+        # info_limpia = formulario.cleaned_data
+        tipo_producto = request.POST.get('tipo_producto')
+        color = request.POST.get('color')
+        marca = request.POST.get('marca')
+        descripcion = request.POST.get('descripcion')
+        accesorio = Accesorio(tipo_producto=tipo_producto, color=color, marca=marca, descripcion=descripcion)
+        accesorio.save()     
+        
+    formulario = CrearAccesorioFormulario()
+    return render(request, 'inicio/accesorios.html', {'formulario_acc': formulario})
 
 
 

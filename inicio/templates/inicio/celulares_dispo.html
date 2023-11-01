@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title_head %}
+<title>celulares</title>
+{% endblock title_head %}
+
+{% block title_body1 %}
+Busqueda de celulares
+{% endblock title_body1 %}
+
+{% block title_body2 %}
+Aqui puedes buscar en el listado de celulares disponibles
+{% endblock title_body2 %}
+
+{% block seccion_body1 %}
+
+<form action="">
+    
+    {{formulario_celular}}
+    <input type="submit" value="Buscar">
+</form>
+
+{% if listado_de_celulares %}
+<ul>
+    {% for celular in listado_de_celulares %}
+    <li>{{celular}} 
+    {% endfor %}
+</ul>
+{% else %}
+<p>No se encontraron celulares.</p>
+{% endif %}
+
+
+{% endblock seccion_body1 %}
+
+
+{% block contact_section %}
+
+{% endblock contact_section %}
